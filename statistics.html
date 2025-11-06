@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cybercrime Statistics - CyberAware360</title>
+  <link rel="stylesheet" href="statistics.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+ 
+  <header class="navbar">
+    <div class="logo">CyberAware360</div>
+    <ul class="nav-links">
+        <li><a href="home.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="prevention.html">Prevention & Response</a></li>
+        <li><a href="report.html">Report</a></li>
+        <li><a href="statistics.html">Statistics</a></li>
+        <li><a href="location.html">Emergency</a></li>
+        <li><a href="track.html">Track Attacker 2.0(Demo)</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li><a href="admin.html">Admin</a></li>
+    </ul>
+  </header>
+
+
+  <section id="statistics">
+    <div class="stats-header">
+      <h1>📊 Real-Time Cybercrime Statistics</h1>
+      <p>Live data showing the current state of cybercrime worldwide</p>
+    </div>
+
+    <!-- Real Stats Cards -->
+    <div class="summary">
+      <div class="card stat-card">
+        <div class="card-icon">🚨</div>
+        <h3>Cyber Attacks (2024)</h3>
+        <p class="stat-number">2.1 Billion</p>
+        <span class="stat-label">Recorded globally</span>
+      </div>
+      <div class="card stat-card">
+        <div class="card-icon">💰</div>
+        <h3>Financial Loss</h3>
+        <p class="stat-number">$8.5 Trillion</p>
+        <span class="stat-label">Estimated by 2024</span>
+      </div>
+      <div class="card stat-card">
+        <div class="card-icon">📧</div>
+        <h3>Phishing Attacks</h3>
+        <p class="stat-number">500 Million/day</p>
+        <span class="stat-label">Emails sent</span>
+      </div>
+      <div class="card stat-card">
+        <div class="card-icon">🕐</div>
+        <h3>Average Response</h3>
+        <p class="stat-number">197 Days</p>
+        <span class="stat-label">To detect breach</span>
+      </div>
+    </div>
+
+    <!-- India-Specific Stats -->
+    <div class="india-section">
+      <h2>🇮🇳 India Cybercrime Statistics (2024)</h2>
+      <div class="india-stats">
+        <div class="india-card">
+          <h3>Total Cases</h3>
+          <p class="big-number">33 Lakh+</p>
+          <p>Reported cases in India</p>
+        </div>
+        <div class="india-card">
+          <h3>Daily Cases</h3>
+          <p class="big-number">12,000+</p>
+          <p>New cases per day</p>
+        </div>
+        <div class="india-card">
+          <h3>UPI Fraud</h3>
+          <p class="big-number">₹1,800 Cr</p>
+          <p>Loss through UPI scams</p>
+        </div>
+        <div class="india-card">
+          <h3>Recovery Rate</h3>
+          <p class="big-number">14.5%</p>
+          <p>Of stolen funds recovered</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="charts">
+      <div class="chart-container">
+        <h3>📈 Types of Cybercrime (Global 2024)</h3>
+        <canvas id="typeChart"></canvas>
+      </div>
+      <div class="chart-container">
+        <h3>🌍 Regional Distribution</h3>
+        <canvas id="regionChart"></canvas>
+      </div>
+      <div class="chart-container">
+        <h3>📅 Cybercrime Trends (Last 5 Years)</h3>
+        <canvas id="trendChart"></canvas>
+      </div>
+    </div>
+
+    <!-- Recent Attacks Section -->
+    <div class="recent-attacks">
+      <h2>🔥 Recent Major Cyberattacks (2024)</h2>
+      <div class="attack-grid">
+        <div class="attack-card critical">
+          <h3>Critical Infrastructure Attack</h3>
+          <p><strong>Target:</strong> Healthcare Sector</p>
+          <p><strong>Impact:</strong> 45M+ records exposed</p>
+          <span class="attack-date">September 2024</span>
+        </div>
+        <div class="attack-card high">
+          <h3>Financial Institution Breach</h3>
+          <p><strong>Target:</strong> Major Bank</p>
+          <p><strong>Impact:</strong> $2.1B in losses</p>
+          <span class="attack-date">August 2024</span>
+        </div>
+        <div class="attack-card medium">
+          <h3>Social Media Data Leak</h3>
+          <p><strong>Target:</strong> Social Platform</p>
+          <p><strong>Impact:</strong> 200M+ users affected</p>
+          <span class="attack-date">July 2024</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <footer>
+    <p>&copy; 2025 CyberAware360. All rights reserved.</p>
+    <p>Data sources: Cybersecurity & Infrastructure Security Agency, CERT-In, NCIC</p>
+  </footer>
+
+  <!-- Admin Link Protection -->
+  <script src="admin-protection.js"></script>
+  <script src="statistics.js"></script>
+</body>
+</html>

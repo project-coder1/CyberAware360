@@ -1,0 +1,103 @@
+<html>
+<header>
+ 
+  <title>CyberAware360 — Emergency Location & SOS</title>
+
+ 
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <style>
+    body { font-family: system-ui, Arial; margin:0; background:#0b1220; color:#e7f3ff; display:flex; flex-direction:column; min-height:100vh; }
+    header{ padding:12px 18px; background:#071021; display:flex; gap:12px; align-items:center;}
+    header h1{ margin:0; font-size:18px; color:#00e0ff; }
+    main{ padding:18px; flex:1; }
+    #map { height: 50vh; border-radius:12px; border:1px solid rgba(255,255,255,0.06); margin-bottom:12px; }
+    .controls { display:flex; gap:8px; flex-wrap:wrap; margin-bottom:12px; }
+    .btn { background:#00e0ff; color:#001018; padding:10px 14px; border-radius:8px; text-decoration:none; cursor:pointer; border:none; font-weight:600;}
+    .btn.sos { background:#ff7b7b; }
+    .info { padding:8px 10px; background:#071021; border-radius:8px; color:#9cc9dd; }
+    .trust-message { margin-bottom:12px; color:#9cc9dd; }
+    footer { background: #071021; text-align:center; padding:12px; font-size:0.9rem; color:#7eaec2; }
+  </style>
+</header>
+<body>
+  <header>
+    <h1>CyberAware360 • Emergency Location & SOS</h1>
+  </header>
+
+  <main>
+    <p class="trust-message">
+      Your location is only used for emergency purposes and will not be stored.
+    </p>
+
+    <div id="map"></div>
+
+    <div class="controls">
+      <button id="startBtn" class="btn">Start Sharing</button>
+      <button id="stopBtn" class="btn">Stop</button>
+      <button id="sosBtn" class="btn sos">SOS Call</button>
+      <div class="info" id="status">Status: idle</div>
+      <div class="info" id="coords">Lat: — , Lng: —</div>
+    </div>
+  </main>
+
+  <footer>&copy; 2025 CyberAware360. All rights reserved.</footer>
+
+  
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script>
+    // Setup Leaflet map
+    const map = L.map('map').setView([20,0], 2);
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{
+      maxZoom: 19, attribution: '&copy; OpenStreetMap contributors'
+    }).addTo(map);
+
+    let marker = null, watchId = null;
+    const statusEl = document.getElementById('status');
+    const coordsEl = document.getElementById('coords');
+
+    function updatePosition(pos){
+      const { latitude, longitude } = pos.coords;
+      coordsEl.textContent = `Lat: ${latitude.toFixed(6)} , Lng: ${longitude.toFixed(6)}`;
+      statusEl.textContent = 'Sharing: active';
+
+      if(!marker){
+        marker = L.marker([latitude, longitude]).addTo(map);
+        marker.bindPopup('You are here').openPopup();
+        map.setView([latitude, longitude], 15);
+      } else {
+        marker.setLatLng([latitude, longitude]);
+      }
+    }
+
+    function handleError(err){
+      statusEl.textContent = 'Error: ' + (err.message || err);
+    }
+
+    document.getElementById('startBtn').addEventListener('click', ()=> {
+      if(!navigator.geolocation){
+        alert('Geolocation not supported by your browser.');
+        return;
+      }
+      watchId = navigator.geolocation.watchPosition(updatePosition, handleError, {
+        enableHighAccuracy: true,
+        maximumAge: 5000,
+        timeout: 10000
+      });
+      statusEl.textContent = 'Requesting permission...';
+    });
+
+    document.getElementById('stopBtn').addEventListener('click', ()=> {
+      if(watchId !== null){
+        navigator.geolocation.clearWatch(watchId);
+        watchId = null;
+        statusEl.textContent = 'Stopped';
+      }
+    });
+
+    document.getElementById('sosBtn').addEventListener('click', ()=> {
+      const emergencyNumber = "100"; // Change to desired emergency number
+      window.location.href = `tel:${emergencyNumber}`;
+    });
+  </script>
+</body>
+</html>

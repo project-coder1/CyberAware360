@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About Cybercrime - CyberAware360</title>
+  <link rel="stylesheet" href="home.css"> 
+  <style>
+    .about-section {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 3rem 2rem;
+    }
+
+    .about-header {
+      text-align: center;
+      margin-bottom: 3rem;
+      animation: fadeInUp 1s ease;
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .about-header h1 {
+      font-size: 3rem;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 1rem;
+    }
+
+    .intro-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+      margin: 3rem 0;
+    }
+
+    .intro-card {
+      background: linear-gradient(135deg, #f8fafc 0%, #ffffff 100%);
+      padding: 2rem;
+      border-radius: 16px;
+      border: 2px solid #e2e8f0;
+      transition: all 0.3s ease;
+      animation: fadeInUp 1s ease 0.2s both;
+    }
+
+    .intro-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 30px rgba(102, 126, 234, 0.2);
+      border-color: #667eea;
+    }
+
+    .intro-card-icon {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+    }
+
+    .intro-card h3 {
+      color: #1e293b;
+      margin-bottom: 0.5rem;
+    }
+
+    .intro-card p {
+      color: #64748b;
+      line-height: 1.6;
+    }
+
+    .cyber-types {
+      margin: 4rem 0;
+    }
+
+    .cyber-types h2 {
+      text-align: center;
+      font-size: 2.5rem;
+      margin-bottom: 2rem;
+      color: #1e293b;
+    }
+
+    .types-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+
+    .type-card {
+      background: white;
+      padding: 1.5rem;
+      border-radius: 12px;
+      border-left: 4px solid #667eea;
+      transition: all 0.3s ease;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    }
+
+    .type-card:hover {
+      transform: translateX(5px);
+      box-shadow: 0 4px 16px rgba(102, 126, 234, 0.15);
+    }
+
+    .type-card h3 {
+      color: #667eea;
+      margin-bottom: 0.5rem;
+      font-size: 1.2rem;
+    }
+
+    .type-card p {
+      color: #64748b;
+      line-height: 1.6;
+      margin: 0;
+    }
+
+    .stats-banner {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      padding: 3rem 2rem;
+      border-radius: 20px;
+      margin: 4rem 0;
+      color: white;
+      text-align: center;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+
+    .stat-box {
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      padding: 1.5rem;
+      border-radius: 12px;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .stat-box h4 {
+      font-size: 0.9rem;
+      opacity: 0.9;
+      margin-bottom: 0.5rem;
+    }
+
+    .stat-box .big-number {
+      font-size: 2.5rem;
+      font-weight: 700;
+    }
+
+    .call-to-action {
+      text-align: center;
+      margin: 4rem 0;
+    }
+
+    .cta-buttons {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-top: 2rem;
+    }
+
+    .cta-btn {
+      padding: 1rem 2rem;
+      border-radius: 12px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .cta-btn-primary {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+    }
+
+    .cta-btn-primary:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 6px 20px rgba(102, 126, 234, 0.5);
+    }
+
+    .cta-btn-secondary {
+      background: white;
+      color: #667eea;
+      border: 2px solid #667eea;
+    }
+
+    .cta-btn-secondary:hover {
+      background: #667eea;
+      color: white;
+    }
+
+    .impact-section {
+      background: #f8fafc;
+      padding: 3rem 2rem;
+      border-radius: 20px;
+      margin: 4rem 0;
+    }
+
+    .impact-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+
+    .impact-item {
+      text-align: center;
+      padding: 1.5rem;
+    }
+
+    .impact-item-icon {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+    }
+
+    .impact-item h3 {
+      color: #1e293b;
+      margin-bottom: 0.5rem;
+    }
+
+    .impact-item p {
+      color: #64748b;
+      line-height: 1.6;
+    }
+  </style>
+</head>
+<body>
+  
+  <header>
+    <nav class="navbar">
+      <div class="logo">CyberAware360</div>
+      <ul class="nav-links">
+      <li><a href="home.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+     <li><a href="prevention.html">Prevention & Response</a></li>
+        <li><a href="report.html">Report</a></li>
+        <li><a href="statistics.html">Statistics</a></li>
+        <li><a href="location.html">Emergency</a></li>
+        <li><a href="track.html">Track Attacker</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li><a href="admin.html">Admin</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <section class="about-section">
+    <div class="about-header">
+      <h1>🛡️ About Cybercrime</h1>
+      <p style="font-size: 1.2rem; color: #64748b; max-width: 800px; margin: 0 auto;">
+        Understanding cybercrime is the first step toward protecting yourself in today's digital world.
+      </p>
+    </div>
+
+    <!-- Intro Cards -->
+    <div class="intro-cards">
+      <div class="intro-card">
+        <div class="intro-card-icon">💰</div>
+        <h3>The Financial Impact</h3>
+        <p>Cybercrime costs the global economy over <strong>$8.5 trillion</strong> annually, with millions of individual victims losing their life savings.</p>
+      </div>
+      <div class="intro-card">
+        <div class="intro-card-icon">🎯</div>
+        <h3>Who's at Risk?</h3>
+        <p>Everyone who uses the internet is a potential target—individuals, businesses, governments, and organizations of all sizes.</p>
+      </div>
+      <div class="intro-card">
+        <div class="intro-card-icon">📈</div>
+        <h3>The Growing Threat</h3>
+        <p>With <strong>2.1 billion</strong> cyberattacks recorded in 2024 alone, cybercrime is growing faster than ever before.</p>
+      </div>
+    </div>
+
+    <!-- What is Cybercrime -->
+    <div>
+      <h2 style="text-align: center; font-size: 2.5rem; margin: 3rem 0;">What is Cybercrime?</h2>
+      <p style="font-size: 1.1rem; line-height: 1.8; color: #334155; max-width: 900px; margin: 0 auto;">
+        Cybercrime refers to any illegal activity that uses computers, networks, or the internet as a primary tool or target. 
+        From sophisticated hacking operations to simple social engineering scams, cybercriminals exploit vulnerabilities to 
+        steal data, money, and personal information. The digital age has created new opportunities for criminals to operate 
+        from anywhere in the world, making cybercrime one of the fastest-growing forms of crime today.
+      </p>
+    </div>
+
+    <!-- Types of Cybercrime -->
+    <div class="cyber-types">
+      <h2>Common Types of Cybercrime</h2>
+      <div class="types-grid">
+        <div class="type-card">
+          <h3>🎣 Phishing</h3>
+          <p>Fake emails, calls, or websites designed to trick users into revealing passwords, bank details, or other personal data. Over 500 million phishing emails are sent daily.</p>
+        </div>
+        <div class="type-card">
+          <h3>💻 Hacking</h3>
+          <p>Unauthorized access to computers or networks to steal, damage, or manipulate data. Includes everything from stealing passwords to corporate espionage.</p>
+        </div>
+        <div class="type-card">
+          <h3>🆔 Identity Theft</h3>
+          <p>Criminals impersonate someone by using stolen personal information like Aadhaar, PAN, or credit card details to commit fraud in your name.</p>
+        </div>
+        <div class="type-card">
+          <h3>💰 Online Scams</h3>
+          <p>Fake job offers, lotteries, shopping sites, or investment schemes designed to trick people into sending money. UPI fraud costs India ₹1,800 crores annually.</p>
+        </div>
+        <div class="type-card">
+          <h3>🔒 Ransomware</h3>
+          <p>A type of malware that locks your files and demands payment (ransom) for unlocking them. Attacks increased by 41% in 2024.</p>
+        </div>
+        <div class="type-card">
+          <h3>😔 Cyberbullying</h3>
+          <p>Harassment, threats, or spreading rumors online to cause emotional or psychological harm, especially affecting children and teenagers.</p>
+        </div>
+        <div class="type-card">
+          <h3>💳 Financial Fraud</h3>
+          <p>Unauthorized online banking transactions, UPI scams, or credit card frauds. Over 33 lakh cases reported in India in 2024.</p>
+        </div>
+        <div class="type-card">
+          <h3>🎭 Social Engineering</h3>
+          <p>Manipulating people into giving away confidential information by exploiting trust. Often involves impersonating legitimate organizations.</p>
+        </div>
+        <div class="type-card">
+          <h3>🦠 Malware</h3>
+          <p>Malicious software including viruses, trojans, and spyware that can damage your computer or steal your data. Common entry points include malicious downloads and email attachments.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Stats Banner -->
+    <div class="stats-banner">
+      <h2 style="margin-bottom: 1rem; font-size: 2rem;">📊 The Scale of Cybercrime in 2024</h2>
+      <div class="stats-grid">
+        <div class="stat-box">
+          <h4>Global Cyberattacks</h4>
+          <div class="big-number">2.1B</div>
+        </div>
+        <div class="stat-box">
+          <h4>Financial Loss</h4>
+          <div class="big-number">$8.5T</div>
+        </div>
+        <div class="stat-box">
+          <h4>India Cases</h4>
+          <div class="big-number">33L+</div>
+        </div>
+        <div class="stat-box">
+          <h4>Daily New Cases</h4>
+          <div class="big-number">12K+</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Impact Section -->
+    <div class="impact-section">
+      <h2 style="text-align: center; font-size: 2rem; margin-bottom: 2rem;">The Impact of Cybercrime</h2>
+      <div class="impact-grid">
+        <div class="impact-item">
+          <div class="impact-item-icon">💸</div>
+          <h3>Financial Loss</h3>
+          <p>Millions lose money to scams, fraud, and ransomware attacks. Many victims never recover their funds.</p>
+        </div>
+        <div class="impact-item">
+          <div class="impact-item-icon">😰</div>
+          <h3>Emotional Distress</h3>
+          <p>Victims experience anxiety, depression, and loss of trust in digital systems after being targeted.</p>
+        </div>
+        <div class="impact-item">
+          <div class="impact-item-icon">🏢</div>
+          <h3>Business Disruption</h3>
+          <p>Companies face data breaches, operational shutdowns, and reputational damage that can take years to recover from.</p>
+        </div>
+        <div class="impact-item">
+          <div class="impact-item-icon">🔐</div>
+          <h3>Privacy Invasion</h3>
+          <p>Personal information, photos, and private communications can be exposed or used for blackmail.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Why Awareness Matters -->
+    <div style="margin: 4rem 0; padding: 3rem; background: linear-gradient(135deg, #f8fafc, #e2e8f0); border-radius: 20px;">
+      <h2 style="font-size: 2rem; margin-bottom: 1.5rem; color: #1e293b;">Why Awareness Matters</h2>
+      <p style="font-size: 1.1rem; line-height: 1.8; color: #334155; margin-bottom: 1.5rem;">
+      Every internet user is a potential target. Understanding how cybercriminals operate is the first step 
+      toward protecting yourself and your loved ones. With the right knowledge and safety practices, 
+      you can minimize risks and navigate the digital world with confidence.
+    </p>
+      <p style="font-size: 1.1rem; line-height: 1.8; color: #334155; font-weight: 600;">
+        The best defense against cybercrime is awareness and education. By recognizing common attack patterns, 
+        learning to identify suspicious activity, and following security best practices, you can significantly 
+        reduce your risk of becoming a victim.
+      </p>
+    </div>
+
+    <!-- Call to Action -->
+    <div class="call-to-action">
+      <h2 style="font-size: 2rem; margin-bottom: 1rem;">Ready to Protect Yourself?</h2>
+      <p style="color: #64748b; margin-bottom: 2rem;">Learn how to stay safe online and report cybercrime incidents</p>
+      <div class="cta-buttons">
+        <a href="prevention.html" class="cta-btn cta-btn-primary">
+          <span>🛡️ Learn Prevention</span>
+        </a>
+        <a href="report.html" class="cta-btn cta-btn-secondary">
+          <span>🚨 Report Cybercrime</span>
+        </a>
+      </div>
+    </div>
+  </section>
+  
+  <footer>
+    <p>&copy; 2025 CyberAware360 | Stay Aware, Stay Secure</p>
+  </footer>
+
+  <!-- Admin Link Protection -->
+  <script src="admin-protection.js"></script>
+</body>
+</html>

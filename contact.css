@@ -1,0 +1,158 @@
+/* Reset defaults */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Body */
+body {
+  background: linear-gradient(135deg, #e6f9f2, #ffffff);
+  color: #1e293b;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* Navbar */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  background: rgba(255, 255, 255, 0.9);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  backdrop-filter: blur(10px);
+}
+
+.navbar .logo {
+  font-size: 1.3rem;
+  font-weight: bold;
+  color: #0d9488;
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 1rem;
+}
+
+.nav-links li a {
+  text-decoration: none;
+  color: #1e293b;
+  padding: 6px 10px;
+  border-radius: 6px;
+  transition: all 0.3s;
+}
+
+.nav-links li a:hover {
+  background: #0d9488;
+  color: #ffffff;
+}
+
+/* Main Section */
+main {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+}
+
+/* Contact Section */
+.contact-section {
+  width: 100%;
+  max-width: 600px;
+  background: #ffffff;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 0 20px rgba(13, 148, 136, 0.15);
+  border: 1px solid #e2e8f0;
+}
+
+.contact-section h1 {
+  color: #0d9488;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.trust-message {
+  color: #475569;
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+/* Form */
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+label {
+  font-weight: 500;
+  color: #1e293b;
+}
+
+input,
+textarea {
+  padding: 10px 12px;
+  border-radius: 8px;
+  border: 1px solid #94a3b8;
+  background: #f9fafb;
+  color: #1e293b;
+  outline: none;
+  font-size: 1rem;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: #94a3b8;
+}
+
+input:focus,
+textarea:focus {
+  border-color: #0d9488;
+  box-shadow: 0 0 5px rgba(13, 148, 136, 0.3);
+}
+
+/* Button */
+.btn {
+  padding: 10px 16px;
+  border: none;
+  border-radius: 8px;
+  background: #0d9488;
+  color: #ffffff;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.btn:hover {
+  background: #0a7e75;
+  box-shadow: 0 0 10px rgba(13, 148, 136, 0.3);
+}
+
+/* Status Message */
+#formStatus {
+  margin-top: 12px;
+  text-align: center;
+  font-weight: 500;
+  color: #0d9488;
+}
+
+/* Footer */
+footer {
+  background: #f1f5f9;
+  text-align: center;
+  padding: 1rem;
+  font-size: 0.9rem;
+  color: #64748b;
+  margin-top: auto;
+  border-top: 1px solid #e2e8f0;
+}

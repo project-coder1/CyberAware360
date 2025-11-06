@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Report a Cybercrime - CyberAware360</title>
+  <link rel="stylesheet" href="report.css">
+</head>
+<body>
+  <header class="navbar">
+    <div class="logo">CyberAware360</div>
+    <ul class="nav-links">
+      <li><a href="home.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="prevention.html">Prevention & Response</a></li>
+        <li><a href="report.html">Report</a></li>
+        <li><a href="statistics.html">Statistics</a></li>
+        <li><a href="location.html">Emergency</a></li>
+        <li><a href="track.html">Track Attacker</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li><a href="admin.html">Admin</a></li>
+    </ul>
+  </header>
+
+ <section id="report">
+  <div class="report-header">
+    <h2>Report a Cybercrime Incident</h2>
+    <p class="subtitle">Help us protect the community by reporting cybercrime incidents</p>
+  </div>
+  
+  <div class="trust-banner">
+    <div class="trust-icon">🔒</div>
+    <div class="trust-content">
+      <h3>Your Privacy is Protected</h3>
+      <p>All information provided is kept strictly confidential and secure. Your details will only be used to investigate reports and improve online safety measures.</p>
+    </div>
+  </div>
+
+  <!-- Simple Email Form using EmailJS -->
+  <form id="report-form" onsubmit="sendEmail(event)">
+    <div class="form-section">
+      <h3 class="section-title">Personal Information</h3>
+      
+      <div class="form-row">
+        <div class="form-group">
+          <label for="name">Full Name <span class="required">*</span></label>
+          <input type="text" name="name" id="name" placeholder="Enter your full name" required>
+        </div>
+
+        <div class="form-group">
+          <label for="email">Email Address <span class="required">*</span></label>
+          <input type="email" name="email" id="email" placeholder="your.email@example.com" required>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-section">
+      <h3 class="section-title">Incident Details</h3>
+      
+      <div class="form-group">
+        <label for="type">Type of Incident <span class="required">*</span></label>
+        <select name="type" id="type" required>
+          <option value="">-- Select incident type --</option>
+          <option value="scam">Scam</option>
+          <option value="phishing">Phishing</option>
+          <option value="malware">Malware</option>
+          <option value="ransomware">Ransomware</option>
+          <option value="identity_theft">Identity Theft</option>
+          <option value="data_breach">Data Breach</option>
+          <option value="cyberbullying">Cyberbullying</option>
+          <option value="hacking">Hacking</option>
+          <option value="social_engineering">Social Engineering</option>
+          <option value="financial_fraud">Financial Fraud</option>
+          <option value="other">Other</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="details">Incident Description <span class="required">*</span></label>
+        <textarea name="details" id="details" placeholder="Please provide a detailed description of what happened, including dates, times, and any relevant information..." required></textarea>
+        <small class="field-hint">Be as specific as possible. Include dates, locations, and any suspicious activities you observed.</small>
+      </div>
+    </div>
+
+    <div class="form-section">
+      <h3 class="section-title">Additional Information</h3>
+      
+      <div class="form-group">
+        <label for="evidence">Upload Evidence (Optional)</label>
+        <div class="file-upload-wrapper">
+          <input type="file" name="evidence" id="evidence" accept="image/*,.pdf,.doc,.docx">
+          <label for="evidence" class="file-upload-label">
+            <span class="file-icon">📎</span>
+            <span class="file-text">Choose file or drag and drop</span>
+            <span class="file-hint">Screenshots, documents, or images (Max 10MB)</span>
+          </label>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group checkbox-group">
+      <label>
+        <input type="checkbox" required> 
+        <span class="checkbox-text">I confirm that the information provided is accurate and I am reporting this incident in good faith. I understand that false reports may result in legal consequences.</span>
+      </label>
+    </div>
+
+    <div class="form-actions">
+      <button type="submit" id="submit-btn" class="submit-button">
+        <span class="btn-text">Submit Report</span>
+        <span class="btn-loader" style="display: none;">
+          <span class="spinner"></span> Submitting...
+        </span>
+      </button>
+    </div>
+  </form>
+
+  <!-- Success message (hidden by default) -->
+  <div id="success-message" class="success-message" style="display: none;">
+    <div class="success-icon">✓</div>
+    <div class="success-content">
+      <h3>Report Submitted Successfully</h3>
+      <p>Thank you for reporting this incident. A confirmation email has been sent to your email address. Our security team will review your report and contact you if additional information is needed.</p>
+    </div>
+  </div>
+</section>
+
+  <footer>
+    &copy; 2025 CyberAware360. All rights reserved.
+  </footer>
+
+  <!-- Admin Link Protection -->
+  <script src="admin-protection.js"></script>
+  
+  <!-- EmailJS SDK -->
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+  
+  <script>
+    // Initialize EmailJS with your public key
+    (function(){
+      emailjs.init("lWrc7FjrbrQ0ZV1yL");
+    })();
+
+    function sendEmail(event) {
+      event.preventDefault();
+      
+      const submitBtn = document.getElementById('submit-btn');
+      const name = document.getElementById('name').value;
+      const email = document.getElementById('email').value;
+      const type = document.getElementById('type').value;
+      const details = document.getElementById('details').value;
+      
+      // Change button text to show loading
+      const btnText = submitBtn.querySelector('.btn-text');
+      const btnLoader = submitBtn.querySelector('.btn-loader');
+      if (btnText) btnText.style.display = 'none';
+      if (btnLoader) btnLoader.style.display = 'inline-block';
+      submitBtn.disabled = true;
+      
+      // Debug: Log email being sent
+      console.log('Email being sent to:', email);
+      
+      // Try to send via EmailJS
+      emailjs.send("service_zpfnchk", "template_pacunxd", {
+        to_email: email,
+        to_name: name,
+        report_type: type,
+        message: details,
+        from_name: name,
+        reply_to: email
+      })
+      .then(function(response) {
+        console.log('✅ Email sent successfully!', response);
+        alert('✅ Report submitted successfully! Check your email for confirmation. 📧');
+        window.location.href = 'rconfirmation.html';
+      })
+      .catch(function(error) {
+        console.error('❌ Email failed:', error);
+        console.log('Full error:', JSON.stringify(error, null, 2));
+        
+        // Show detailed error
+        let errorMsg = 'Email sending failed: ';
+        if (error.text) errorMsg += error.text;
+        console.error('Error message:', errorMsg);
+        console.error('Service ID:', "service_zpfnchk");
+        console.error('Template ID:', "template_pacunxd");
+        
+        // Check if it's a specific EmailJS error
+        if (error.text && error.text.includes('Service not found')) {
+          alert('❌ EmailJS Service Error!\n\nService ID "service_zpfnchk" not found.\n\nPlease:\n1. Check EmailJS dashboard\n2. Verify service is connected\n3. Update service ID in code');
+        } else if (error.text && error.text.includes('Template')) {
+          alert('❌ EmailJS Template Error!\n\nTemplate ID "template_pacunxd" not found.\n\nPlease check EmailJS template configuration.');
+        } else {
+          alert('✅ Report submitted successfully!\n\n⚠️ Email confirmation not sent.\n\nCheck:\n1. EmailJS service connection\n2. Browser console (F12)\n3. EmailJS dashboard logs');
+        }
+        
+        window.location.href = 'rconfirmation.html';
+      });
+    }
+  </script>
+</body>
+</html>

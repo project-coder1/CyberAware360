@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Dashboard - CyberAware360</title>
+  <link rel="stylesheet" href="admin.css">
+</head>
+<body>
+  <!-- Password Protection Modal -->
+  <div id="passwordModal" class="password-modal">
+    <div class="password-modal-content">
+      <div class="password-modal-header">
+        <h2>🔒 Admin Access Required</h2>
+        <p>Please enter the admin password to continue</p>
+      </div>
+      <form id="passwordForm" onsubmit="checkPassword(event)">
+        <div class="password-input-group">
+          <label for="adminPassword">Password</label>
+          <input type="password" id="adminPassword" placeholder="Enter admin password" required autofocus>
+          <div id="passwordError" class="password-error"></div>
+        </div>
+        <div class="password-modal-actions">
+          <button type="submit" class="password-submit-btn">Enter</button>
+          <a href="home.html" class="password-cancel-btn">Cancel</a>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div id="adminContent" style="display: none;">
+    <header class="navbar">
+      <div class="navbar-left">
+        <div class="logo">CyberAware360 Admin</div>
+        <div class="user-info">
+          <span class="user-name">Admin</span>
+          <button class="logout-btn" onclick="logout()">Logout</button>
+        </div>
+      </div>
+      <ul class="nav-links">
+        <li><a href="home.html">Home</a></li>
+        <li><a href="report.html">Reports</a></li>
+        <li><a href="statistics.html">Statistics</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </header>
+
+    <main>
+      <!-- Tab Navigation -->
+      <div class="tabs-container">
+        <button class="tab-btn active" onclick="switchTab('dashboard')">
+          <span>📊</span> Dashboard
+        </button>
+        <button class="tab-btn" onclick="switchTab('reports')">
+          <span>📋</span> Reports
+        </button>
+        <button class="tab-btn" onclick="switchTab('analytics')">
+          <span>📈</span> Analytics
+        </button>
+        <button class="tab-btn" onclick="switchTab('activity')">
+          <span>📝</span> Activity Logs
+        </button>
+        <button class="tab-btn" onclick="switchTab('settings')">
+          <span>⚙️</span> Settings
+        </button>
+      </div>
+
+      <!-- Dashboard Tab -->
+      <div id="dashboardTab" class="tab-content active">
+        <section class="admin-section">
+          <div class="dashboard-header">
+            <h1>📊 Admin Dashboard</h1>
+            <div class="dashboard-actions">
+              <button class="action-icon-btn" onclick="refreshData()" title="Refresh Data">
+                <span>🔄</span>
+              </button>
+              <button class="action-icon-btn" onclick="exportData('dashboard')" title="Export Dashboard">
+                <span>📥</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Stats Cards -->
+          <div class="stats-grid">
+            <div class="stat-card total">
+              <div class="stat-icon">📊</div>
+              <div class="stat-info">
+                <div class="stat-value" id="totalReports">0</div>
+                <div class="stat-label">Total Reports</div>
+                <div class="stat-change positive">+12% from last month</div>
+              </div>
+            </div>
+            <div class="stat-card pending">
+              <div class="stat-icon">⏳</div>
+              <div class="stat-info">
+                <div class="stat-value" id="pendingReports">0</div>
+                <div class="stat-label">Pending Reports</div>
+                <div class="stat-change warning">Requires attention</div>
+              </div>
+            </div>
+            <div class="stat-card resolved">
+              <div class="stat-icon">✅</div>
+              <div class="stat-info">
+                <div class="stat-value" id="resolvedReports">0</div>
+                <div class="stat-label">Resolved</div>
+                <div class="stat-change positive">+8% this week</div>
+              </div>
+            </div>
+            <div class="stat-card investigation">
+              <div class="stat-icon">🔍</div>
+              <div class="stat-info">
+                <div class="stat-value" id="investigationReports">0</div>
+                <div class="stat-label">Under Investigation</div>
+                <div class="stat-change">Active cases</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Quick Stats -->
+          <div class="quick-stats-grid">
+            <div class="quick-stat-card">
+              <h3>Top Incident Types</h3>
+              <div id="topTypesList" class="types-list"></div>
+            </div>
+            <div class="quick-stat-card">
+              <h3>Recent Activity</h3>
+              <div id="recentActivityList" class="activity-list"></div>
+            </div>
+            <div class="quick-stat-card">
+              <h3>Response Time</h3>
+              <div class="response-time">
+                <div class="response-value">24h</div>
+                <div class="response-label">Average Response Time</div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <!-- Reports Tab -->
+      <div id="reportsTab" class="tab-content">
+        <section class="admin-section">
+          <div class="section-header">
+            <h2>📋 Report Management</h2>
+            <div class="section-actions">
+              <button class="btn-secondary" onclick="exportData('reports')">📥 Export</button>
+              <button class="btn-primary" onclick="showBulkActions()">⚡ Bulk Actions</button>
+            </div>
+          </div>
+
+          <!-- Advanced Filters -->
+          <div class="filters-advanced">
+            <div class="filter-group">
+              <input type="text" id="searchInput" placeholder="🔍 Search by name, email, or type...">
+              <select id="typeFilter">
+                <option value="">All Types</option>
+                <option value="scam">Scam</option>
+                <option value="phishing">Phishing</option>
+                <option value="malware">Malware</option>
+                <option value="ransomware">Ransomware</option>
+                <option value="identity_theft">Identity Theft</option>
+                <option value="data_breach">Data Breach</option>
+                <option value="cyberbullying">Cyberbullying</option>
+                <option value="hacking">Hacking</option>
+                <option value="social_engineering">Social Engineering</option>
+                <option value="financial_fraud">Financial Fraud</option>
+                <option value="other">Other</option>
+              </select>
+              <select id="statusFilter">
+                <option value="">All Status</option>
+                <option value="Pending">Pending</option>
+                <option value="Investigation">Under Investigation</option>
+                <option value="Resolved">Resolved</option>
+              </select>
+              <input type="date" id="dateFrom" placeholder="From Date">
+              <input type="date" id="dateTo" placeholder="To Date">
+              <button class="btn-clear" onclick="clearFilters()">Clear Filters</button>
+            </div>
+          </div>
+
+          <!-- Bulk Actions Bar -->
+          <div id="bulkActionsBar" class="bulk-actions-bar" style="display: none;">
+            <span id="selectedCount">0 selected</span>
+            <div class="bulk-actions">
+              <button class="btn-sm" onclick="bulkAction('status', 'Pending')">Mark Pending</button>
+              <button class="btn-sm" onclick="bulkAction('status', 'Investigation')">Mark Investigating</button>
+              <button class="btn-sm" onclick="bulkAction('status', 'Resolved')">Mark Resolved</button>
+              <button class="btn-sm danger" onclick="bulkAction('delete')">Delete Selected</button>
+            </div>
+          </div>
+
+          <div class="table-container">
+            <table id="reportsTable">
+              <thead>
+                <tr>
+                  <th><input type="checkbox" id="selectAll" onchange="toggleSelectAll()"></th>
+                  <th>ID</th>
+                  <th>Name</th>
+                  <th>Email</th>
+                  <th>Type</th>
+                  <th>Description</th>
+                  <th>Date</th>
+                  <th>Status</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody></tbody>
+            </table>
+          </div>
+
+          <!-- Pagination -->
+          <div class="pagination">
+            <button class="page-btn" onclick="changePage(-1)">← Previous</button>
+            <span class="page-info">Page <span id="currentPage">1</span> of <span id="totalPages">1</span></span>
+            <button class="page-btn" onclick="changePage(1)">Next →</button>
+          </div>
+        </section>
+      </div>
+
+      <!-- Analytics Tab -->
+      <div id="analyticsTab" class="tab-content">
+        <section class="admin-section">
+          <h2>📈 Analytics & Insights</h2>
+          
+          <div class="analytics-grid">
+            <div class="analytics-card">
+              <h3>Reports by Type</h3>
+              <div id="typeChart" class="chart-container"></div>
+            </div>
+            <div class="analytics-card">
+              <h3>Reports by Status</h3>
+              <div id="statusChart" class="chart-container"></div>
+            </div>
+            <div class="analytics-card">
+              <h3>Reports Over Time</h3>
+              <div id="timeChart" class="chart-container"></div>
+            </div>
+            <div class="analytics-card">
+              <h3>Response Statistics</h3>
+              <div id="responseStats" class="response-stats"></div>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <!-- Activity Logs Tab -->
+      <div id="activityTab" class="tab-content">
+        <section class="admin-section">
+          <div class="section-header">
+            <h2>📝 Activity Logs</h2>
+            <button class="btn-secondary" onclick="exportData('activity')">📥 Export Logs</button>
+          </div>
+          
+          <div class="activity-filters">
+            <select id="activityTypeFilter">
+              <option value="">All Activities</option>
+              <option value="report">Report Actions</option>
+              <option value="status">Status Changes</option>
+              <option value="system">System Actions</option>
+            </select>
+            <input type="date" id="activityDateFrom">
+            <input type="date" id="activityDateTo">
+          </div>
+
+          <div class="activity-log-container">
+            <div id="activityLogs" class="activity-logs"></div>
+          </div>
+        </section>
+      </div>
+
+      <!-- Settings Tab -->
+      <div id="settingsTab" class="tab-content">
+        <section class="admin-section">
+          <h2>⚙️ System Settings</h2>
+          
+          <div class="settings-grid">
+            <div class="settings-card">
+              <h3>General Settings</h3>
+              <div class="setting-item">
+                <label>Auto-assign Reports</label>
+                <label class="switch">
+                  <input type="checkbox" id="autoAssign">
+                  <span class="slider"></span>
+                </label>
+              </div>
+              <div class="setting-item">
+                <label>Email Notifications</label>
+                <label class="switch">
+                  <input type="checkbox" id="emailNotifications" checked>
+                  <span class="slider"></span>
+                </label>
+              </div>
+              <div class="setting-item">
+                <label>Reports Per Page</label>
+                <select id="reportsPerPage">
+                  <option value="10">10</option>
+                  <option value="25" selected>25</option>
+                  <option value="50">50</option>
+                  <option value="100">100</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="settings-card">
+              <h3>Security Settings</h3>
+              <div class="setting-item">
+                <label>Change Admin Password</label>
+                <button class="btn-secondary" onclick="showChangePassword()">Change Password</button>
+              </div>
+              <div class="setting-item">
+                <label>Session Timeout</label>
+                <select id="sessionTimeout">
+                  <option value="30">30 minutes</option>
+                  <option value="60" selected>1 hour</option>
+                  <option value="120">2 hours</option>
+                  <option value="0">Never</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="settings-card">
+              <h3>Data Management</h3>
+              <div class="setting-item">
+                <label>Export All Data</label>
+                <button class="btn-secondary" onclick="exportData('all')">Export</button>
+              </div>
+              <div class="setting-item">
+                <label>Clear Activity Logs</label>
+                <button class="btn-danger" onclick="clearActivityLogs()">Clear Logs</button>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <footer>&copy; 2025 CyberAware360. All rights reserved.</footer>
+  </div>
+
+  <!-- Report Details Modal -->
+  <div id="reportModal" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2>Report Details</h2>
+        <button class="modal-close" onclick="closeModal()">×</button>
+      </div>
+      <div id="reportModalBody" class="modal-body"></div>
+    </div>
+  </div>
+
+  <!-- Change Password Modal -->
+  <div id="changePasswordModal" class="modal">
+    <div class="modal-content small">
+      <div class="modal-header">
+        <h2>Change Admin Password</h2>
+        <button class="modal-close" onclick="closeChangePasswordModal()">×</button>
+      </div>
+      <div class="modal-body">
+        <form onsubmit="changePassword(event)">
+          <div class="form-group">
+            <label>Current Password</label>
+            <input type="password" id="currentPassword" required>
+          </div>
+          <div class="form-group">
+            <label>New Password</label>
+            <input type="password" id="newPassword" required>
+          </div>
+          <div class="form-group">
+            <label>Confirm New Password</label>
+            <input type="password" id="confirmPassword" required>
+          </div>
+          <div class="modal-actions">
+            <button type="submit" class="btn-primary">Change Password</button>
+            <button type="button" class="btn-secondary" onclick="closeChangePasswordModal()">Cancel</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <script src="admin.js"></script>
+  <script>
+    // Admin Password
+    const ADMIN_PASSWORD = '9175746451';
+
+    // Check if user is already authenticated
+    if (sessionStorage.getItem('adminAuthenticated') !== 'true') {
+      document.getElementById('passwordModal').style.display = 'flex';
+      document.getElementById('adminContent').style.display = 'none';
+    } else {
+      document.getElementById('passwordModal').style.display = 'none';
+      document.getElementById('adminContent').style.display = 'block';
+    }
+
+    function checkPassword(event) {
+      event.preventDefault();
+      const password = document.getElementById('adminPassword').value;
+      const errorDiv = document.getElementById('passwordError');
+
+      if (password === ADMIN_PASSWORD) {
+        sessionStorage.setItem('adminAuthenticated', 'true');
+        document.getElementById('passwordModal').style.display = 'none';
+        document.getElementById('adminContent').style.display = 'block';
+        errorDiv.textContent = '';
+        logActivity('system', 'Admin logged in');
+      } else {
+        errorDiv.textContent = '❌ Incorrect password. Please try again.';
+        document.getElementById('adminPassword').value = '';
+        document.getElementById('adminPassword').focus();
+        
+        const modal = document.querySelector('.password-modal-content');
+        modal.style.animation = 'shake 0.5s';
+        setTimeout(() => { modal.style.animation = ''; }, 500);
+      }
+    }
+
+    function logout() {
+      if (confirm('Are you sure you want to logout?')) {
+        sessionStorage.removeItem('adminAuthenticated');
+        window.location.href = 'home.html';
+      }
+    }
+
+    // Auto-focus on password input when modal opens
+    document.addEventListener('DOMContentLoaded', function() {
+      if (sessionStorage.getItem('adminAuthenticated') !== 'true') {
+        setTimeout(() => {
+          document.getElementById('adminPassword').focus();
+        }, 100);
+      }
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Prevention & Response - CyberAware360</title>
+  <link rel="stylesheet" href="home.css">
+  <style>
+    body {
+      background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+    }
+
+    .prevention-header {
+      text-align: center;
+      padding: 4rem 2rem 3rem;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+    }
+
+    .prevention-header h1 {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2rem;
+    }
+
+    .prevention-section, .response-section {
+      margin: 3rem 0;
+      background: white;
+      padding: 3rem;
+      border-radius: 20px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+    }
+
+    .prevention-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+
+    .prevention-card {
+      background: linear-gradient(135deg, #f8fafc, #ffffff);
+      padding: 2rem;
+      border-radius: 16px;
+      border: 2px solid #e2e8f0;
+      transition: all 0.3s ease;
+      animation: fadeInUp 1s ease both;
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .prevention-card:nth-child(1) { animation-delay: 0.1s; }
+    .prevention-card:nth-child(2) { animation-delay: 0.2s; }
+    .prevention-card:nth-child(3) { animation-delay: 0.3s; }
+    .prevention-card:nth-child(4) { animation-delay: 0.4s; }
+    .prevention-card:nth-child(5) { animation-delay: 0.5s; }
+    .prevention-card:nth-child(6) { animation-delay: 0.6s; }
+
+    .prevention-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 30px rgba(102, 126, 234, 0.15);
+      border-color: #667eea;
+    }
+
+    .card-icon {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+    }
+
+    .card-title {
+      font-size: 1.3rem;
+      color: #1e293b;
+      margin-bottom: 0.5rem;
+      font-weight: 600;
+    }
+
+    .card-text {
+      color: #64748b;
+      line-height: 1.6;
+    }
+
+    .response-steps {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+
+    .step-card {
+      background: linear-gradient(135deg, #fef3c7, #fde68a);
+      padding: 2rem;
+      border-radius: 16px;
+      border-left: 4px solid #f59e0b;
+      animation: slideIn 0.6s ease both;
+    }
+
+    @keyframes slideIn {
+      from {
+        opacity: 0;
+        transform: translateX(-20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
+    .step-number {
+      display: inline-block;
+      background: #f59e0b;
+      color: white;
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      text-align: center;
+      line-height: 30px;
+      font-weight: 700;
+      margin-right: 1rem;
+    }
+
+    .section-title {
+      font-size: 2.5rem;
+      color: #1e293b;
+      margin-bottom: 2rem;
+      text-align: center;
+    }
+
+    .tip-box {
+      background: #e0f2fe;
+      border-left: 4px solid #0ea5e9;
+      padding: 1.5rem;
+      border-radius: 12px;
+      margin: 2rem 0;
+    }
+
+    .tip-box h4 {
+      color: #0369a1;
+      margin-bottom: 0.5rem;
+    }
+
+    .urgent-box {
+      background: #fee2e2;
+      border-left: 4px solid #ef4444;
+      padding: 2rem;
+      border-radius: 12px;
+      margin: 2rem 0;
+      animation: pulse 2s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.9; }
+    }
+
+    .urgent-box h4 {
+      color: #dc2626;
+      margin-bottom: 0.5rem;
+      font-size: 1.3rem;
+    }
+
+    .cta-section {
+      text-align: center;
+      padding: 4rem 2rem;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      border-radius: 20px;
+      color: white;
+      margin: 3rem auto;
+      max-width: 1200px;
+    }
+
+    .cta-btn {
+      display: inline-block;
+      background: white;
+      color: #667eea;
+      padding: 1rem 2.5rem;
+      border-radius: 12px;
+      text-decoration: none;
+      font-weight: 600;
+      margin-top: 2rem;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    }
+
+    .cta-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+    }
+  </style>
+</head>
+<body>
+
+  <header class="navbar">
+    <div class="logo">CyberAware360</div>
+    <ul class="nav-links">
+      <li><a href="home.html">Home</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="prevention.html">Prevention & Response</a></li>
+      <li><a href="report.html">Report</a></li>
+      <li><a href="statistics.html">Statistics</a></li>
+      <li><a href="location.html">Emergency</a></li>
+      <li><a href="track.html">Track Attacker</a></li>
+      <li><a href="contact.html">Contact</a></li>
+      <li><a href="admin.html">Admin</a></li>
+    </ul>
+  </header>
+
+  <section class="prevention-header">
+    <h1>🛡️ Prevention & Response</h1>
+    <p style="font-size: 1.2rem; opacity: 0.95;">Protect yourself and know what to do if you're attacked</p>
+  </section>
+
+  <div class="container">
+    <!-- Prevention Tips -->
+    <section class="prevention-section">
+      <h2 class="section-title">How to Stay Safe Online</h2>
+      
+      <div class="prevention-grid">
+        <div class="prevention-card">
+          <div class="card-icon">🔑</div>
+          <h3 class="card-title">Strong Passwords</h3>
+          <p class="card-text">Use passwords with at least 12 characters, including uppercase, lowercase, numbers, and symbols. Never reuse passwords across different accounts.</p>
+        </div>
+
+        <div class="prevention-card">
+          <div class="card-icon">🔐</div>
+          <h3 class="card-title">Two-Factor Authentication</h3>
+          <p class="card-text">Enable 2FA on all important accounts (email, banking, social media). This adds an extra layer of security beyond your password.</p>
+        </div>
+
+        <div class="prevention-card">
+          <div class="card-icon">🛡️</div>
+          <h3 class="card-title">Software Updates</h3>
+          <p class="card-text">Keep your operating system, apps, and antivirus software updated. Updates often include security patches for known vulnerabilities.</p>
+        </div>
+
+        <div class="prevention-card">
+          <div class="card-icon">🚫</div>
+          <h3 class="card-title">Don't Click Unknown Links</h3>
+          <p class="card-text">Be cautious of links in emails, messages, or social media. Hover over links to check the destination URL before clicking.</p>
+        </div>
+
+        <div class="prevention-card">
+          <div class="card-icon">🌐</div>
+          <h3 class="card-title">Verify Websites</h3>
+          <p class="card-text">Check for HTTPS (lock icon) and verify the website domain before entering sensitive information or making payments.</p>
+        </div>
+
+        <div class="prevention-card">
+          <div class="card-icon">📧</div>
+          <h3 class="card-title">Beware of Phishing</h3>
+          <p class="card-text">Never share OTP, passwords, or personal details over phone or email, even if the caller claims to be from a legitimate organization.</p>
+        </div>
+      </div>
+
+      <div class="tip-box">
+        <h4>💡 Pro Tip</h4>
+        <p>Use a password manager to generate and store unique passwords for each account. This makes it easy to use strong passwords without having to remember them all.</p>
+      </div>
+    </section>
+
+    <!-- Response Steps -->
+    <section class="response-section">
+      <h2 class="section-title">🚨 If You Are Scammed - What to Do</h2>
+      
+      <div class="urgent-box">
+        <h4>⚠️ Immediate Actions (Do These First!)</h4>
+        <p>If you've just been scammed, take these steps immediately to minimize damage and increase the chances of recovering your losses.</p>
+      </div>
+
+      <div class="response-steps">
+        <div class="step-card">
+          <span class="step-number">1</span>
+          <strong>Freeze Your Accounts</strong>
+          <p>Contact your bank immediately to freeze your credit/debit cards and bank accounts. This prevents further unauthorized transactions.</p>
+        </div>
+
+        <div class="step-card">
+          <span class="step-number">2</span>
+          <strong>Report to Cybercrime Portal</strong>
+          <p>Report the incident immediately through our <a href="report.html">Cybercrime Portal</a> to get an official case number for your records.</p>
+        </div>
+
+        <div class="step-card">
+          <span class="step-number">3</span>
+          <strong>Change All Passwords</strong>
+          <p>Change passwords for email, banking, social media, and any other compromised accounts. Use strong, unique passwords for each.</p>
+        </div>
+
+        <div class="step-card">
+          <span class="step-number">4</span>
+          <strong>Scan for Malware</strong>
+          <p>Run a full antivirus scan on all devices. Remove any suspicious apps or software that might have been installed by the attacker.</p>
+        </div>
+
+        <div class="step-card">
+          <span class="step-number">5</span>
+          <strong>Keep Evidence</strong>
+          <p>Save screenshots, transaction IDs, suspicious messages, and any communication with the scammers. This helps with investigation.</p>
+        </div>
+
+        <div class="step-card">
+          <span class="step-number">6</span>
+          <strong>Contact Law Enforcement</strong>
+          <p>File a formal complaint with your local cybercrime police station. Provide all evidence and case details from the cybercrime portal.</p>
+        </div>
+
+        <div class="step-card">
+          <span class="step-number">7</span>
+          <strong>Monitor Your Accounts</strong>
+          <p>Regularly check your bank statements and credit reports for any unauthorized activity. Set up account alerts for unusual transactions.</p>
+        </div>
+
+        <div class="step-card">
+          <span class="step-number">8</span>
+          <strong>Contact Credit Bureau</strong>
+          <p>Place a fraud alert on your credit report to prevent criminals from opening accounts in your name. This is free and effective.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Additional Tips -->
+    <section class="prevention-section">
+      <h2 class="section-title">💡 Additional Safety Tips</h2>
+      
+      <div class="prevention-grid">
+        <div class="prevention-card">
+          <div class="card-icon">📱</div>
+          <h3 class="card-title">Mobile Security</h3>
+          <p class="card-text">Lock your phone with biometric authentication (fingerprint/face unlock) and enable "Find My Device" features for remote wipe if lost.</p>
+        </div>
+
+        <div class="prevention-card">
+          <div class="card-icon">💻</div>
+          <h3 class="card-title">Public WiFi Caution</h3>
+          <p class="card-text">Avoid accessing sensitive accounts or making payments on public WiFi. Use a VPN if you must connect to public networks.</p>
+        </div>
+
+        <div class="prevention-card">
+          <div class="card-icon">📊</div>
+          <h3 class="card-title">Regular Backups</h3>
+          <p class="card-text">Backup your important files regularly to cloud storage or external drives. This protects against ransomware and data loss.</p>
+        </div>
+
+        <div class="prevention-card">
+          <div class="card-icon">👥</div>
+          <h3 class="card-title">Social Media Privacy</h3>
+          <p class="card-text">Review your privacy settings on social media. Limit who can see your personal information and avoid oversharing.</p>
+        </div>
+
+        <div class="prevention-card">
+          <div class="card-icon">🔔</div>
+          <h3 class="card-title">Enable Notifications</h3>
+          <p class="card-text">Enable transaction alerts from your bank. Get notified of every payment, withdrawal, or login attempt on your accounts.</p>
+        </div>
+
+        <div class="prevention-card">
+          <div class="card-icon">🎓</div>
+          <h3 class="card-title">Stay Educated</h3>
+          <p class="card-text">Keep learning about new scams and cybersecurity threats. Knowledge is your best defense against cybercrime.</p>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- Call to Action -->
+  <section class="cta-section">
+    <h2 style="font-size: 2.5rem; margin-bottom: 1rem;">🚨 Been a Victim of Cybercrime?</h2>
+    <p style="font-size: 1.2rem; margin-bottom: 1rem;">Don't panic - we're here to help. Report immediately and our team will assist you.</p>
+    <a href="report.html" class="cta-btn">Report Cybercrime Now →</a>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 CyberAware360 | Stay Aware, Stay Secure</p>
+  </footer>
+
+  <!-- Admin Link Protection -->
+  <script src="admin-protection.js"></script>
+</body>
+</html>

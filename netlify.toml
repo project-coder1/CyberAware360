@@ -1,0 +1,10 @@
+[build]
+  command = "echo 'No build needed'"
+  publish = "."
+
+[build.environment]
+  # This file will be populated with environment variables
+
+[[plugins]]
+  package = "netlify-plugin-form-submissions-notification"
+
